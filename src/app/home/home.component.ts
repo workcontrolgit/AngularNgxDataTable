@@ -3,8 +3,9 @@ import { finalize } from 'rxjs/operators';
 
 import { QuoteService } from './quote.service';
 
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Person } from './person';
+import { ApiHttpService } from '@core/services/api-http.service';
+import { ApiEndpointsService } from '@core/services/api-endpoints.service';
 
 class DataTablesResponse {
   data: any[];
@@ -25,7 +26,11 @@ export class HomeComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   persons: Person[];
 
-  constructor(private quoteService: QuoteService, private http: HttpClient) {}
+  constructor(
+    private quoteService: QuoteService,
+    private apiHttpService: ApiHttpService,
+    private apiEndpointsService: ApiEndpointsService
+  ) {}
 
   ngOnInit() {
     this.isLoading = true;
@@ -48,14 +53,14 @@ export class HomeComponent implements OnInit {
       serverSide: true,
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
-        that.http
-          .post<DataTablesResponse>('https://angular-datatables-demo-server.herokuapp.com/', dataTablesParameters, {})
+        that.apiHttpService
+          .post(this.apiEndpointsService.postPersonsEndpoint(), dataTablesParameters)
           .pipe(
             finalize(() => {
               that.isLoading = false;
             })
           )
-          .subscribe((resp) => {
+          .subscribe((resp: DataTablesResponse) => {
             that.persons = resp.data;
 
             callback({
