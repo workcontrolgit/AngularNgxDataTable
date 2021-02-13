@@ -6,13 +6,6 @@ import { QueryStringParameters } from '@shared/classes/query-string-parameters';
 // Application Constants
 import { Constants } from '@app/config/constants';
 
-class DataTablesResponse {
-  data: any[];
-  draw: number;
-  recordsFiltered: number;
-  recordsTotal: number;
-}
-
 @Injectable()
 
 // Returns the api endpoints urls to use in services in a consistent way
