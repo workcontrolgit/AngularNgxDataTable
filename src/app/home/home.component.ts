@@ -1,17 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
 
-import { Person } from '../@shared/models/person';
+import { Person } from '@shared/models/person';
 import { ApiHttpService } from '@core/services/api-http.service';
 import { ApiEndpointsService } from '@core/services/api-endpoints.service';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
-
-// class DataTablesResponse {
-//   data: any[];
-//   draw: number;
-//   recordsFiltered: number;
-//   recordsTotal: number;
-// }
 
 @Component({
   selector: 'app-home',
@@ -19,9 +11,6 @@ import { DataTablesResponse } from '@shared/classes/data-tables-response';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  quote: string | undefined;
-  isLoading = false;
-
   dtOptions: DataTables.Settings = {};
   persons: Person[];
 
@@ -48,7 +37,7 @@ export class HomeComponent implements OnInit {
             });
           });
       },
-      columns: [{ data: 'id' }, { data: 'firstName' }, { data: 'lastName' }],
+      columns: [{ data: 'positionNumber' }, { data: 'positionTitle' }, { data: 'positionDescription' }],
     };
   }
 }
