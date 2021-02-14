@@ -29,7 +29,7 @@ export class AboutComponent implements OnInit {
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
         that.apiHttpService
-          .post(this.apiEndpointsService.postPersonsEndpoint(), dataTablesParameters)
+          .post(this.apiEndpointsService.postPositionsEndpoint(), dataTablesParameters)
           .subscribe((resp: DataTablesResponse) => {
             that.persons = resp.data;
 

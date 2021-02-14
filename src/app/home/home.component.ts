@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { finalize } from 'rxjs/operators';
 
-import { Person } from '@shared/models/person';
+import { Person } from '../@shared/models/person';
 import { ApiHttpService } from '@core/services/api-http.service';
 import { ApiEndpointsService } from '@core/services/api-endpoints.service';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
@@ -11,6 +12,9 @@ import { DataTablesResponse } from '@shared/classes/data-tables-response';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  quote: string | undefined;
+  isLoading = false;
+
   dtOptions: DataTables.Settings = {};
   persons: Person[];
 
@@ -26,7 +30,7 @@ export class HomeComponent implements OnInit {
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
         that.apiHttpService
-          .post(this.apiEndpointsService.postPersonsEndpoint(), dataTablesParameters)
+          .post(this.apiEndpointsService.postPersonsEndpoint(), dataTablesParameters, false)
           .subscribe((resp: DataTablesResponse) => {
             that.persons = resp.data;
 
@@ -37,7 +41,7 @@ export class HomeComponent implements OnInit {
             });
           });
       },
-      columns: [{ data: 'positionNumber' }, { data: 'positionTitle' }, { data: 'positionDescription' }],
+      columns: [{ data: 'id' }, { data: 'firstName' }, { data: 'lastName' }],
     };
   }
 }

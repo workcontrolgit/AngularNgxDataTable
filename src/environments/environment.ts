@@ -17,7 +17,7 @@ export const environment = {
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US'],
   Api_Endpoint: 'https://localhost:44378/api/v1/Positions/Paged',
-  Api_Mock_Endpoint: 'https://angular-datatables-demo-server.herokuapp.com/',
+  Api_Mock_Endpoint: 'https://angular-datatables-demo-server.herokuapp.com',
 };
 
 /*
