@@ -5,4 +5,25 @@
     </h1>
     <p><i class="far fa-bookmark"></i> <span translate>Version</span> {{ version }}</p>
   </div>
+  <table datatable [dtOptions]="dtOptions" class="table-border hover">
+    <thead>
+      <tr>
+        <th>Position Number</th>
+        <th>Position Title</th>
+        <th>Position Descripton</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="positions?.length != 0">
+      <tr *ngFor="let position of positions">
+        <td>{{ position.positionNumber }}</td>
+        <td>{{ position.positionTitle }}</td>
+        <td>{{ position.positionDescription }}</td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="positions?.length == 0">
+      <tr>
+        <td colspan="3" class="no-data-available">No data!</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
