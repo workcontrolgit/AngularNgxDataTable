@@ -14,7 +14,7 @@ describe('HomeComponent', () => {
       TestBed.configureTestingModule({
         imports: [CoreModule, SharedModule, HttpClientTestingModule],
         declarations: [HomeComponent],
-        providers: [QuoteService],
+        providers: [],
       }).compileComponents();
     })
   );
