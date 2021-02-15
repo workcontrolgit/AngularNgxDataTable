@@ -5,6 +5,7 @@ import { Position } from '@shared/models/position';
 import { ApiHttpService } from '@core/services/api-http.service';
 import { ApiEndpointsService } from '@core/services/api-endpoints.service';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-about',
@@ -16,11 +17,13 @@ export class AboutComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
   positions: Position[];
+  isLoading = false;
 
   constructor(private apiHttpService: ApiHttpService, private apiEndpointsService: ApiEndpointsService) {}
 
   ngOnInit() {
-    const that = this;
+    //const that = this;
+    this.isLoading = true;
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -28,10 +31,16 @@ export class AboutComponent implements OnInit {
       serverSide: true,
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
-        that.apiHttpService
+        this.apiHttpService
           .post(this.apiEndpointsService.postPositionsEndpoint(), dataTablesParameters)
+          .pipe(
+            finalize(() => {
+              this.isLoading = false;
+            })
+          )
+
           .subscribe((resp: DataTablesResponse) => {
-            that.positions = resp.data;
+            this.positions = resp.data;
 
             callback({
               recordsTotal: resp.recordsTotal,

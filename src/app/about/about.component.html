@@ -4,7 +4,9 @@
       <span translate>APP_NAME</span>
     </h1>
     <p><i class="far fa-bookmark"></i> <span translate>Version</span> {{ version }}</p>
+    <app-loader [isLoading]="isLoading"></app-loader>
   </div>
+  <!-- <div [hidden]="isLoading"> -->
   <table datatable [dtOptions]="dtOptions" class="table-border hover">
     <thead>
       <tr>
@@ -26,4 +28,5 @@
       </tr>
     </tbody>
   </table>
+  <!-- </div> -->
 </div>
