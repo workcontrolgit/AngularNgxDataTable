@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
 
 import { Person } from '../@shared/models/person';
 import { ApiHttpService } from '@core/services/api-http.service';
@@ -21,18 +20,16 @@ export class HomeComponent implements OnInit {
   constructor(private apiHttpService: ApiHttpService, private apiEndpointsService: ApiEndpointsService) {}
 
   ngOnInit() {
-    const that = this;
-
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
       serverSide: true,
       processing: true,
       ajax: (dataTablesParameters: any, callback) => {
-        that.apiHttpService
+        this.apiHttpService
           .post(this.apiEndpointsService.postPersonsEndpoint(), dataTablesParameters, false)
           .subscribe((resp: DataTablesResponse) => {
-            that.persons = resp.data;
+            this.persons = resp.data;
 
             callback({
               recordsTotal: resp.recordsTotal,

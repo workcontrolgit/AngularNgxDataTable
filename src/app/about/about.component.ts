@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { environment } from '@env/environment';
-import { Person } from '@shared/models/person';
+import { Position } from '@shared/models/position';
 import { ApiHttpService } from '@core/services/api-http.service';
 import { ApiEndpointsService } from '@core/services/api-endpoints.service';
 import { DataTablesResponse } from '@shared/classes/data-tables-response';
@@ -15,7 +15,7 @@ export class AboutComponent implements OnInit {
   version: string | null = environment.version;
 
   dtOptions: DataTables.Settings = {};
-  persons: Person[];
+  positions: Position[];
 
   constructor(private apiHttpService: ApiHttpService, private apiEndpointsService: ApiEndpointsService) {}
 
@@ -31,7 +31,7 @@ export class AboutComponent implements OnInit {
         that.apiHttpService
           .post(this.apiEndpointsService.postPositionsEndpoint(), dataTablesParameters)
           .subscribe((resp: DataTablesResponse) => {
-            that.persons = resp.data;
+            that.positions = resp.data;
 
             callback({
               recordsTotal: resp.recordsTotal,

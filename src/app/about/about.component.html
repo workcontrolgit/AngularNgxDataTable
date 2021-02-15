@@ -13,14 +13,14 @@
         <th>Position Descripton</th>
       </tr>
     </thead>
-    <tbody *ngIf="persons?.length != 0">
-      <tr *ngFor="let person of persons">
-        <td>{{ person.positionNumber }}</td>
-        <td>{{ person.positionTitle }}</td>
-        <td>{{ person.positionDescription }}</td>
+    <tbody *ngIf="positions?.length != 0">
+      <tr *ngFor="let position of positions">
+        <td>{{ position.positionNumber }}</td>
+        <td>{{ position.positionTitle }}</td>
+        <td>{{ position.positionDescription }}</td>
       </tr>
     </tbody>
-    <tbody *ngIf="persons?.length == 0">
+    <tbody *ngIf="positions?.length == 0">
       <tr>
         <td colspan="3" class="no-data-available">No data!</td>
       </tr>

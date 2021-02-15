@@ -47,11 +47,17 @@ export class ApiEndpointsService {
 
   // call regular endpoint without boolean true at end
   public getPersonsEndpoint = (): string => this.createUrl('Persons');
-  // call regular endpoint without boolean true at end
 
+  // Call API technique https://medium.com/better-programming/angular-api-calls-the-right-way-264198bf2c64
+
+  // call Mock endpoint
+  // https://angular-datatables-demo-server.herokuapp.com
   public postPersonsEndpoint = (): string => this.createUrl('', true);
 
-  public postPositionsEndpoint = (): string => this.createUrl('');
+  // call regular endpoint without boolean true at end
+  // https://localhost:44378/api/v1 (ASP.NET CORE REST API.  Repo https://github.com/workcontrolgit/AngularNgxDataTableBackend)
+  public postPositionsEndpoint = (): string => this.createUrl('Positions/Paged');
+
   /* #endregion */
 
   /* #region URL CREATOR */
